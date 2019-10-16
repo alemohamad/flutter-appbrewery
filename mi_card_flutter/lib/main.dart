@@ -11,43 +11,33 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.teal,
         body: SafeArea(
-          child: Column(
-            // Column or Row
-//            mainAxisSize: MainAxisSize.min,
-//            verticalDirection: VerticalDirection.up,
-//            verticalDirection: VerticalDirection.down,
-//            mainAxisAlignment: MainAxisAlignment.center,
-//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//            crossAxisAlignment: CrossAxisAlignment.end,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
                 width: 100.0,
-                height: 100.0,
-                color: Colors.white,
-                child: Text('Container 1'),
-              ),
-              SizedBox(
-                height: 20.0,
-                // this can be used to separate elements
-              ),
-              Container(
-                width: 100.0,
-                height: 100.0,
-                color: Colors.blue,
-                child: Text('Container 2'),
-              ),
-              Container(
-                width: 100.0,
-                height: 100.0,
                 color: Colors.red,
-                child: Text('Container 3'),
               ),
-//              Container(
-              // to use with CrossAxisAlignment.end
-//                width: double.infinity,
-//              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    width: 100.0,
+                    height: 100.0,
+                    color: Colors.yellow,
+                  ),
+                  Container(
+                    width: 100.0,
+                    height: 100.0,
+                    color: Colors.green,
+                  ),
+                ],
+              ),
+              Container(
+                width: 100.0,
+                color: Colors.blue,
+              ),
             ],
           ),
         ),
@@ -55,5 +45,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// stless -> Stateless Widget snippet
