@@ -1,7 +1,9 @@
 import 'question.dart';
 
 class QuizBrain {
-  List<Question> questionsList = [
+  int _questionNumber = 0;
+
+  List<Question> _questionsList = [
     Question(
       'You can lead a cow down stairs but not up stairs.',
       false,
@@ -51,4 +53,18 @@ class QuizBrain {
       true,
     ),
   ];
+
+  void nextQuestion() {
+    if (_questionNumber < _questionsList.length - 1) {
+      _questionNumber += 1;
+    }
+  }
+
+  String getQuestionText() {
+    return _questionsList[_questionNumber].questionText;
+  }
+
+  bool getCorrectAnswer() {
+    return _questionsList[_questionNumber].questionAnswer;
+  }
 }
