@@ -19,3 +19,4 @@ Built in collaboration with the [Google Flutter team](https://flutter.dev).
 7. Drums (Challenge)
 8. Quizzler
 9. Destiny (Challenge)
+10. BMI Calculator
