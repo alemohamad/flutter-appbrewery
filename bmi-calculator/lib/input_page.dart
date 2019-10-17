@@ -92,17 +92,29 @@ class _InputPageState extends State<InputPage> {
                       ),
                     ],
                   ),
-                  Slider(
-                    value: height.toDouble(),
-                    min: 120.0,
-                    max: 220.0,
-                    activeColor: Color(0xFFEB1555),
-                    inactiveColor: Color(0xFF8D8E98),
-                    onChanged: (double newValue) {
-                      setState(() {
-                        height = newValue.toInt();
-                      });
-                    },
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: Colors.white,
+                      inactiveTrackColor: kGreyColor,
+                      thumbColor: kPinkishColor,
+                      overlayColor: kPinkishAlphaColor,
+                      thumbShape: RoundSliderThumbShape(
+                        enabledThumbRadius: 15.0,
+                      ),
+                      overlayShape: RoundSliderOverlayShape(
+                        overlayRadius: 30.0,
+                      ),
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 120.0,
+                      max: 220.0,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.toInt();
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -125,7 +137,7 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Container(
-            color: kBottomContainerColor,
+            color: kPinkishColor,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
             height: kBottomContainerHeight,
