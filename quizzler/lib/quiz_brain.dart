@@ -55,7 +55,7 @@ class QuizBrain {
   ];
 
   void nextQuestion() {
-    if (_questionNumber < _questionsList.length - 1) {
+    if (!isFinished()) {
       _questionNumber += 1;
     }
   }
@@ -66,5 +66,17 @@ class QuizBrain {
 
   bool getCorrectAnswer() {
     return _questionsList[_questionNumber].questionAnswer;
+  }
+
+  bool isFinished() {
+    if (_questionNumber < _questionsList.length - 1) {
+      return false;
+    }
+
+    return true;
+  }
+
+  void reset() {
+    _questionNumber = 0;
   }
 }
