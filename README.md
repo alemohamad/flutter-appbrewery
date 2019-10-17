@@ -20,3 +20,4 @@ Built in collaboration with the [Google Flutter team](https://flutter.dev).
 8. Quizzler
 9. Destiny (Challenge)
 10. BMI Calculator
+11. Clima
