@@ -16,3 +16,4 @@ Built in collaboration with the [Google Flutter team](https://flutter.dev).
 4. Dicee
 5. Magic 8 Ball (Challenge)
 6. Xylophone
+7. Drums (Challenge)
