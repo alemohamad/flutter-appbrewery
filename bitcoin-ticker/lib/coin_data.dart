@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 const List<String> currenciesList = [
+  'ARS',
   'AUD',
   'BRL',
   'CAD',
@@ -29,6 +30,7 @@ const List<String> cryptoList = [
   'BTC',
   'ETH',
   'LTC',
+  'XRP',
 ];
 
 class CoinData {
