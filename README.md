@@ -21,3 +21,4 @@ Built in collaboration with the [Google Flutter team](https://flutter.dev).
 9. Destiny (Challenge)
 10. BMI Calculator
 11. Clima
+12. Bitcoin Ticker
