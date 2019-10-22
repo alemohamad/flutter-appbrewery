@@ -12,7 +12,12 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
-  String btcValue = '?';
+
+  var cryptoValues = {
+    'BTC': '?',
+    'ETH': '?',
+    'LTC': '?',
+  };
 
   @override
   void initState() {
@@ -22,16 +27,19 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 
   void updateUI() async {
-    // https://apiv2.bitcoinaverage.com/#ticker-data-per-symbol
-    String coinUrl =
-        'https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC$selectedCurrency';
-    CoinData coin = CoinData(coinUrl);
+    for (String crypto in cryptoList) {
+      // https://apiv2.bitcoinaverage.com/#ticker-data-per-symbol
+      String codeUrl = crypto + selectedCurrency;
+      String coinUrl =
+          'https://apiv2.bitcoinaverage.com/indices/global/ticker/$codeUrl';
+      CoinData coin = CoinData(coinUrl);
 
-    dynamic coinData = await coin.getCoinData();
+      dynamic coinData = await coin.getCoinData();
 
-    setState(() {
-      btcValue = coinData['last'].toString();
-    });
+      setState(() {
+        cryptoValues[crypto] = coinData['last'].toString();
+      });
+    }
   }
 
   DropdownButton<String> androidDropdown() {
@@ -76,6 +84,37 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 
+  List<Padding> getCryptoList() {
+    List<Padding> cardsList = [];
+
+    for (String crypto in cryptoList) {
+      Padding cryptoCard = Padding(
+        padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+        child: Card(
+          color: Colors.lightBlueAccent,
+          elevation: 5.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+            child: Text(
+              '1 $crypto = ${cryptoValues[crypto]} $selectedCurrency',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      );
+      cardsList.add(cryptoCard);
+    }
+
+    return cardsList;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,26 +125,10 @@ class _PriceScreenState extends State<PriceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.lightBlueAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  '1 BTC = $btcValue $selectedCurrency',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+          // for (String crypot in cryptoList) {
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: getCryptoList(),
           ),
           Container(
             height: 150.0,
