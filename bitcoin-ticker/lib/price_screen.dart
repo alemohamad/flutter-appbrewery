@@ -18,11 +18,13 @@ class _PriceScreenState extends State<PriceScreen> {
   void initState() {
     super.initState();
 
-    // https://apiv2.bitcoinaverage.com/#ticker-data-per-symbol
-    updateUI('https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD');
+    updateUI();
   }
 
-  void updateUI(String coinUrl) async {
+  void updateUI() async {
+    // https://apiv2.bitcoinaverage.com/#ticker-data-per-symbol
+    String coinUrl =
+        'https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC$selectedCurrency';
     CoinData coin = CoinData(coinUrl);
 
     dynamic coinData = await coin.getCoinData();
@@ -50,6 +52,7 @@ class _PriceScreenState extends State<PriceScreen> {
       onChanged: (value) {
         setState(() {
           selectedCurrency = value;
+          updateUI();
         });
       },
     );
@@ -66,7 +69,8 @@ class _PriceScreenState extends State<PriceScreen> {
       backgroundColor: Colors.lightBlue,
       itemExtent: 32.0,
       onSelectedItemChanged: (selectedIndex) {
-        print(selectedIndex);
+        selectedCurrency = currenciesList[selectedIndex];
+        updateUI();
       },
       children: pickerItems,
     );
@@ -93,7 +97,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = $btcValue USD',
+                  '1 BTC = $btcValue $selectedCurrency',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
